@@ -69,27 +69,6 @@ minetest.register_node("nc_furniture:table_"..material, {
 })
 end
 
-
-minetest.register_node("nc_furniture:furn_frame", {
-	tiles = {
-		"nc_woodwork_plank.png",
-		"nc_woodwork_plank.png",
-		"nc_woodwork_plank.png",
-		"nc_woodwork_plank.png",
-		"nc_woodwork_plank.png",
-		"nc_woodwork_plank.png"
-	},
-	drawtype = "nodebox",
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.5, 0.375, -0.5, 0.5, 0.5, 0.5},
-			{-0.5, 0.5, 0.375, 0.5, 1.375, 0.5}, 
-		}
-	}
-})
-
 minetest.register_node("nc_furniture:furn_legs", {
 	tiles = {
 		"nc_woodwork_plank.png",
