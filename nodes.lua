@@ -1,10 +1,6 @@
 local chair_table = { --name, material, invimg
-{"Stone Chair", "cobble"},
-{"Wood Chair", "wood"},
-{"Acacia Wood Chair", "acacia_wood"},
-{"Aspen Wood Chair", "aspen_wood"},
-{"Pine Wood Chair", "pine_wood"},
-{"Jungle Wood Chair", "junglewood"}
+{"Stone Chair", "terrain_stone"},
+{"Wood Chair", "woodwork_plank"}
 }
 
 for i in ipairs (chair_table) do
@@ -15,11 +11,10 @@ for i in ipairs (chair_table) do
 minetest.register_node("nc_furniture:chair_"..material, {
 	description = name,
 	drawtype = "nodebox",
-	tiles = {"default_"..material..".png"},
-	groups = {choppy=2, oddly_breakably_by_hand=2, furniture=1, flammable=1},
+	tiles = {"nc_"..material..".png^nc_legs_"..material.."^nc_"..material..".png"},
+	groups = {choppy=2, oddly_breakably_by_hand=2, flammable=1},
 	paramtype = "light",
 	paramtype2 = "facedir",
-	sounds = default.node_sound_wood_defaults(),
 	on_rightclick = function(pos, node, clicker)
 		nc_furniture.sit(pos, node, clicker)
 		end,
@@ -38,8 +33,8 @@ minetest.register_node("nc_furniture:chair_"..material, {
 end
 
 local table_table = { --name, material, invimg
-{"Stone Table", "stonework_stone"},
-{"Wood Table", "woodwork_wood"}
+{"Stone Table", "terrain_stone"},
+{"Wood Table", "woodwork_plank"}
 }
 
 for i in ipairs (table_table) do
@@ -51,21 +46,16 @@ minetest.register_node("nc_furniture:table_"..material, {
 	description = name,
 	drawtype = "nodebox",
 	tiles = {"nc_"..material..".png"},
-	groups = {snappy = 2, oddly_breakable_by_hand = 2, furniture = 1, flammable = 1, table = 1},
+	groups = {snappy = 2, oddly_breakable_by_hand = 2, flammable = 1, table = 1},
 	paramtype = "light",
 	paramtype2 = "facedir",
-	sounds = default.node_sound_wood_defaults(),
 	node_box = {
 		type = "fixed",
 		fixed = {
 			{-0.125, -0.5, -0.125, 0.125, 0.3125, 0.125}, -- NodeBox2
 			{-0.5, 0.3125, -0.5, 0.5, 0.5, 0.5}, -- NodeBox3
 		}
-	},
-
-	after_dig_node = function(pos) nc_furniture.check_table(pos, material, false, true) end,
-	after_place_node = function(pos) nc_furniture.check_table(pos, material, true, true) end,
-	on_punch = function(pos) nc_furniture.check_table(pos, material, true, true) end
+	}
 })
 end
 
